@@ -6,18 +6,26 @@ void main() {
   testWidgets('portfolio home renders core sections', (tester) async {
     await tester.pumpWidget(const PortfolioApp());
 
-    expect(find.text('Qusai Jamous'), findsNWidgets(2));
-    expect(
-      find.text('Flutter developer building production mobile apps.'),
-      findsOneWidget,
-    );
+    expect(find.text('Flutter Mobile Application Developer'), findsOneWidget);
+    expect(find.text('Download CV'), findsWidgets);
+    expect(find.text('Contact Me'), findsOneWidget);
+
     await tester.scrollUntilVisible(
-      find.text('Selected work'.toUpperCase()),
+      find.text('About Me'.toUpperCase()),
       500,
       scrollable: find.byType(Scrollable),
     );
 
-    expect(find.text('Selected work'.toUpperCase()), findsOneWidget);
+    expect(find.text('About Me'.toUpperCase()), findsOneWidget);
+
+    await tester.scrollUntilVisible(
+      find.text('E-commerce App'),
+      500,
+      scrollable: find.byType(Scrollable),
+    );
+
+    expect(find.text('E-commerce App'), findsWidgets);
+
     await tester.scrollUntilVisible(
       find.textContaining('qqjamous12@gmail.com'),
       500,

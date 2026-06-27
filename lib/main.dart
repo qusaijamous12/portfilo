@@ -1,9 +1,16 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'link_launcher.dart';
 
+const _name = 'Qusai Jamous';
 const _emailAddress = 'qqjamous12@gmail.com';
+const _phoneNumber = 'Available on CV';
+const _linkedinUrl = 'https://www.linkedin.com/in/qusai-jamous-12a03a272';
+const _githubUrl = 'https://github.com';
+const _whatsAppUrl = 'https://wa.me/';
 const _cvAssetUrl = 'assets/assets/cv/qusai_jamous_flutter_developer_cv.pdf';
 const _profileImageAsset = 'assets/images/qusai_jamous_profile.jpeg';
 
@@ -16,24 +23,26 @@ class PortfolioApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const ink = Color(0xFF151719);
-    const paper = Color(0xFFF7F3EA);
-    const moss = Color(0xFF6F7F52);
+    const background = Color(0xFF080B12);
+    const surface = Color(0xFF111827);
+    const accent = Color(0xFF34D399);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Qusai Jamous Portfolio',
+      title: 'Qusai Jamous | Flutter Mobile Application Developer',
       theme: ThemeData(
         useMaterial3: true,
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: background,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: moss,
-          brightness: Brightness.light,
-          surface: paper,
+          seedColor: accent,
+          brightness: Brightness.dark,
+          surface: surface,
         ),
-        scaffoldBackgroundColor: paper,
-        textTheme: ThemeData.light().textTheme.apply(
-          bodyColor: ink,
-          displayColor: ink,
+        fontFamily: 'Roboto',
+        textTheme: ThemeData.dark().textTheme.apply(
+          bodyColor: Colors.white,
+          displayColor: Colors.white,
           fontFamily: 'Roboto',
         ),
       ),
@@ -45,154 +54,136 @@ class PortfolioApp extends StatelessWidget {
 class PortfolioHome extends StatelessWidget {
   const PortfolioHome({super.key});
 
-  static const _projects = [
-    Project(
-      title: 'E-Commerce Applications',
-      description:
-          'Production shopping experiences with polished product flows, cart logic, checkout journeys, and scalable app structure.',
-      tags: ['Flutter', 'GetX', 'Payments'],
-      icon: Icons.storefront,
-    ),
-    Project(
-      title: 'Payment Integrations',
-      description:
-          'Integrated payment gateways including ClickPay and HyperPay for secure mobile checkout experiences.',
-      tags: ['ClickPay', 'HyperPay', 'APIs'],
-      icon: Icons.payments_outlined,
-    ),
-    Project(
-      title: 'Maps & Google Services',
-      description:
-          'Built app features using Google Maps, Firebase, Google sign-in, and other Google service integrations.',
-      tags: ['Google Maps', 'Firebase', 'Auth'],
-      icon: Icons.map_outlined,
-    ),
+  static const _skills = [
+    SkillGroup('Languages', ['Dart', 'Java', 'Kotlin'], Icons.code),
+    SkillGroup('Frameworks', ['Flutter'], Icons.flutter_dash),
+    SkillGroup('State Management', [
+      'Bloc',
+      'Cubit',
+      'Provider',
+      'GetX',
+      'Riverpod',
+    ], Icons.account_tree_outlined),
+    SkillGroup('Backend', [
+      'Firebase',
+      'REST APIs',
+      'Socket.IO',
+    ], Icons.cloud_outlined),
+    SkillGroup('Firebase', [
+      'Authentication',
+      'Firestore',
+      'Cloud Messaging',
+      'Storage',
+      'Analytics',
+      'Crashlytics',
+    ], Icons.local_fire_department_outlined),
+    SkillGroup('Payments', ['HyperPay', 'ClickPay'], Icons.payments_outlined),
+    SkillGroup('Maps', [
+      'Google Maps',
+      'Location Services',
+    ], Icons.map_outlined),
+    SkillGroup('Architecture', [
+      'Clean Architecture',
+      'Repository Pattern',
+      'SOLID Principles',
+      'MVVM',
+    ], Icons.foundation_outlined),
+    SkillGroup('Tools', [
+      'Git',
+      'GitHub',
+      'Android Studio',
+      'VS Code',
+      'Postman',
+      'Figma',
+    ], Icons.construction_outlined),
   ];
 
-  static const _skills = [
-    'Flutter',
-    'Dart',
-    'Firebase',
-    'Google Maps',
-    'Google Sign-In',
-    'ClickPay',
-    'HyperPay',
-    'REST APIs',
-    'GetX',
-    'BLoC',
-    'Riverpod',
-    'Git',
-    'Clean Architecture',
+  static const _projects = [
+    Project(
+      title: 'E-commerce App',
+      summary:
+          'A scalable shopping experience built for smooth product discovery, checkout, payments, orders, and customer notifications.',
+      problem:
+          'Help customers move from browsing to checkout with fewer friction points while keeping the codebase maintainable.',
+      features: [
+        'Authentication',
+        'Cart',
+        'Orders',
+        'Payments',
+        'Notifications',
+      ],
+      technologies: ['Flutter', 'REST APIs', 'Firebase', 'HyperPay'],
+      icon: Icons.shopping_bag_outlined,
+      accent: Color(0xFF38BDF8),
+    ),
+    Project(
+      title: 'eSIM App',
+      summary:
+          'A mobile eSIM purchase and activation flow with secure payment integration and clear activation guidance.',
+      problem:
+          'Make purchasing and activating a digital SIM feel simple, reliable, and understandable for mobile users.',
+      features: ['Purchase eSIM', 'QR Activation', 'Payment Integration'],
+      technologies: ['Flutter', 'ClickPay', 'QR Flow', 'Clean Architecture'],
+      icon: Icons.sim_card_outlined,
+      accent: Color(0xFFF59E0B),
+    ),
+    Project(
+      title: 'Real-time Chat',
+      summary:
+          'A responsive real-time communication experience with instant messages, notifications, and reliable sync.',
+      problem:
+          'Support fast user-to-user messaging while keeping conversations updated across app sessions.',
+      features: ['Firebase', 'Socket.IO', 'Push Notifications'],
+      technologies: ['Flutter', 'Firebase', 'Socket.IO', 'FCM'],
+      icon: Icons.forum_outlined,
+      accent: Color(0xFFA78BFA),
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            const SliverToBoxAdapter(child: _NavBar()),
-            SliverToBoxAdapter(
-              child: _PageSection(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    final isWide = constraints.maxWidth > 860;
-                    final hero = const _HeroIntro();
-                    final panel = const _HeroPanel();
-
-                    if (!isWide) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [hero, const SizedBox(height: 28), panel],
-                      );
-                    }
-
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(flex: 11, child: hero),
-                        const SizedBox(width: 48),
-                        Expanded(flex: 9, child: panel),
-                      ],
-                    );
-                  },
+      body: Stack(
+        children: [
+          const _Background(),
+          SafeArea(
+            child: CustomScrollView(
+              slivers: [
+                const SliverToBoxAdapter(child: _NavBar()),
+                const SliverToBoxAdapter(child: _HeroSection()),
+                const SliverToBoxAdapter(child: _RecruiterSnapshot()),
+                const SliverToBoxAdapter(child: _AboutSection()),
+                const SliverToBoxAdapter(child: _ExperienceSection()),
+                SliverToBoxAdapter(child: _SkillsSection(groups: _skills)),
+                SliverToBoxAdapter(
+                  child: _ProjectsSection(projects: _projects),
                 ),
-              ),
+                //   const SliverToBoxAdapter(child: _SocialProofSection()),
+                // const SliverToBoxAdapter(child: _ContactSection()),
+                // const SliverToBoxAdapter(child: SizedBox(height: 34)),
+              ],
             ),
-            SliverToBoxAdapter(
-              child: _PageSection(
-                topPadding: 32,
-                child: _SectionHeader(
-                  eyebrow: 'Selected work',
-                  title: 'Mobile app work shaped for real users and stores.',
-                  description:
-                      'A snapshot of the kinds of Flutter applications and integrations I have worked on professionally.',
-                ),
-              ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
-              sliver: SliverLayoutBuilder(
-                builder: (context, constraints) {
-                  final width = constraints.crossAxisExtent;
-                  final count = width > 1050
-                      ? 3
-                      : width > 680
-                      ? 2
-                      : 1;
+          ),
+        ],
+      ),
+    );
+  }
+}
 
-                  return SliverGrid(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) =>
-                          _ProjectCard(project: _projects[index]),
-                      childCount: _projects.length,
-                    ),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: count,
-                      mainAxisSpacing: 18,
-                      crossAxisSpacing: 18,
-                      childAspectRatio: count == 1 ? 1.25 : 0.92,
-                    ),
-                  );
-                },
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: _PageSection(
-                topPadding: 24,
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    final isWide = constraints.maxWidth > 820;
-                    final skills = _SkillCloud(skills: _skills);
-                    final experience = const _ExperienceBlock();
+class _Background extends StatelessWidget {
+  const _Background();
 
-                    if (!isWide) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          skills,
-                          const SizedBox(height: 24),
-                          experience,
-                        ],
-                      );
-                    }
-
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(child: skills),
-                        const SizedBox(width: 36),
-                        Expanded(child: experience),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ),
-            const SliverToBoxAdapter(child: _ContactBand()),
-          ],
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF080B12), Color(0xFF0D1320), Color(0xFF111827)],
         ),
       ),
+      child: const SizedBox.expand(),
     );
   }
 }
@@ -202,8 +193,8 @@ class _NavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 18, 24, 6),
+    return _PageSection(
+      verticalPadding: 18,
       child: Row(
         children: [
           Container(
@@ -211,34 +202,40 @@ class _NavBar extends StatelessWidget {
             height: 44,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: const Color(0xFF151719),
+              color: Colors.white.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
             ),
             child: const Text(
               'QJ',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w800,
-                letterSpacing: 0,
-              ),
+              style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 0),
             ),
           ),
           const SizedBox(width: 12),
           const Expanded(
-            child: Text(
-              'Qusai Jamous',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _name,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+                ),
+                Text(
+                  'Flutter Mobile Developer',
+                  style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 12),
+                ),
+              ],
             ),
           ),
-          _IconAction(
+          _RoundIconButton(
             icon: Icons.mail_outline,
-            label: 'Email',
+            label: 'Contact',
             onPressed: () => _contactByEmail(context),
           ),
           const SizedBox(width: 8),
-          _IconAction(
+          _RoundIconButton(
             icon: Icons.description_outlined,
-            label: 'CV',
+            label: 'Download CV',
             onPressed: () => _openCv(context),
           ),
         ],
@@ -247,149 +244,900 @@ class _NavBar extends StatelessWidget {
   }
 }
 
-class _HeroIntro extends StatelessWidget {
-  const _HeroIntro();
+class _HeroSection extends StatelessWidget {
+  const _HeroSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return _Reveal(
+      child: _PageSection(
+        verticalPadding: 44,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final isWide = constraints.maxWidth >= 920;
+            final content = Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const _StatusPill(text: '2+ years building production apps'),
+                const SizedBox(height: 22),
+                Text(
+                  'Flutter Mobile Application Developer',
+                  style: TextStyle(
+                    fontSize: _heroTitleSize(context),
+                    height: 1.02,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0,
+                  ),
+                ),
+                const SizedBox(height: 18),
+                const Text(
+                  'Building scalable, high-performance cross-platform applications with Flutter.',
+                  style: TextStyle(
+                    fontSize: 22,
+                    height: 1.35,
+                    color: Color(0xFFD1D5DB),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 18),
+                const Text(
+                  'I have 2+ years of experience developing production-ready Flutter applications, including E-commerce, eSIM, and Real-Time applications. I focus on clean architecture, maintainable code, and exceptional user experience.',
+                  style: TextStyle(
+                    fontSize: 17,
+                    height: 1.65,
+                    color: Color(0xFFAEB7C2),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Wrap(
+                  spacing: 12,
+                  runSpacing: 12,
+                  children: [
+                    _PrimaryButton(
+                      icon: Icons.download_outlined,
+                      label: 'Download CV',
+                      onPressed: () => _openCv(context),
+                    ),
+                    _SecondaryButton(
+                      icon: Icons.mail_outline,
+                      label: 'Contact Me',
+                      onPressed: () => _contactByEmail(context),
+                    ),
+                  ],
+                ),
+              ],
+            );
+
+            final panel = const _HeroProfilePanel();
+            if (!isWide) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [content, const SizedBox(height: 30), panel],
+              );
+            }
+
+            return Row(
+              children: [
+                Expanded(flex: 11, child: content),
+                const SizedBox(width: 46),
+                Expanded(flex: 8, child: panel),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  double _heroTitleSize(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
+    if (width < 380) return 38;
+    if (width < 680) return 46;
+    return 68;
+  }
+}
+
+class _HeroProfilePanel extends StatelessWidget {
+  const _HeroProfilePanel();
+
+  @override
+  Widget build(BuildContext context) {
+    return _GlassCard(
+      padding: const EdgeInsets.all(18),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Image.asset(
+                _profileImageAsset,
+                fit: BoxFit.cover,
+                filterQuality: FilterQuality.medium,
+                errorBuilder: (_, _, _) => const ColoredBox(
+                  color: Color(0xFF1F2937),
+                  child: Icon(Icons.person_outline, size: 84),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 18),
+          const Text(
+            'Production-ready Flutter applications for commerce, telecom, delivery, and real-time experiences.',
+            style: TextStyle(
+              fontSize: 18,
+              height: 1.45,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          const SizedBox(height: 18),
+          const Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              _MetricPill(value: '2+', label: 'Years'),
+              _MetricPill(value: '3+', label: 'Industries'),
+              _MetricPill(value: '10+', label: 'Integrations'),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RecruiterSnapshot extends StatelessWidget {
+  const _RecruiterSnapshot();
+
+  @override
+  Widget build(BuildContext context) {
+    const items = [
+      _SnapshotItem('Role', 'Flutter Mobile Developer', Icons.work_outline),
+      _SnapshotItem('Experience', '2+ years', Icons.verified_outlined),
+      _SnapshotItem(
+        'Industries',
+        'E-commerce, eSIM, Real-time',
+        Icons.category_outlined,
+      ),
+      _SnapshotItem(
+        'Strengths',
+        'Clean Architecture, Firebase, Payments',
+        Icons.bolt_outlined,
+      ),
+    ];
+
+    return _PageSection(
+      verticalPadding: 18,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final columns = constraints.maxWidth > 920 ? 4 : 2;
+          return GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: items.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: columns,
+              mainAxisExtent: 128,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+            ),
+            itemBuilder: (context, index) => _InfoTile(item: items[index]),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _AboutSection extends StatelessWidget {
+  const _AboutSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return const _Reveal(
+      delay: Duration(milliseconds: 120),
+      child: _PageSection(
+        child: _GlassCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _SectionHeader(
+                eyebrow: 'About Me',
+                title: 'A mobile developer focused on products that ship.',
+                description:
+                    'I am a Flutter Mobile Application Developer with more than two years of experience building high-quality mobile applications.\n\nI have worked on multiple production applications including E-commerce platforms, eSIM applications, delivery systems, and real-time applications.\n\nMy expertise includes payment gateway integration (HyperPay, ClickPay), Firebase services, Socket.IO, Google Maps, push notifications, REST APIs, state management, and clean architecture.\n\nI enjoy building scalable applications with clean, maintainable code while delivering excellent user experiences.',
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ExperienceSection extends StatelessWidget {
+  const _ExperienceSection();
+
+  @override
+  Widget build(BuildContext context) {
+    const highlights = [
+      '2+ Years Experience',
+      'Production Applications',
+      'E-commerce Apps',
+      'eSIM Platform',
+      'Payment Integrations',
+      'Firebase',
+      'Real-time Applications',
+      'REST APIs',
+      'Google Maps',
+      'Push Notifications',
+      'CI/CD',
+      'Clean Architecture',
+      'State Management',
+      'Responsive UI',
+    ];
+
+    return _Reveal(
+      delay: const Duration(milliseconds: 180),
+      child: _PageSection(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const _SectionHeader(
+              eyebrow: 'Experience',
+              title: 'Flutter Mobile Developer',
+              description:
+                  'Professional experience building, integrating, and maintaining mobile applications for real production workflows.',
+            ),
+            const SizedBox(height: 20),
+            _GlassCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      _IconBadge(icon: Icons.phone_android_outlined),
+                      const SizedBox(width: 14),
+                      const Expanded(
+                        child: Text(
+                          'Mobile application delivery across product, integration, and user experience layers.',
+                          style: TextStyle(
+                            fontSize: 18,
+                            height: 1.45,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 22),
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: [
+                      for (final item in highlights) _SkillChip(text: item),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SkillsSection extends StatelessWidget {
+  const _SkillsSection({required this.groups});
+
+  final List<SkillGroup> groups;
+
+  @override
+  Widget build(BuildContext context) {
+    return _Reveal(
+      delay: const Duration(milliseconds: 240),
+      child: _PageSection(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const _SectionHeader(
+              eyebrow: 'Skills',
+              title: 'A toolkit for reliable Flutter products.',
+              description:
+                  'Grouped by the areas recruiters and engineering teams usually scan first.',
+            ),
+            const SizedBox(height: 22),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final columns = constraints.maxWidth > 1040
+                    ? 3
+                    : constraints.maxWidth > 680
+                    ? 2
+                    : 1;
+                return GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: groups.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: columns,
+                    mainAxisExtent: 210,
+                    crossAxisSpacing: 14,
+                    mainAxisSpacing: 14,
+                  ),
+                  itemBuilder: (context, index) =>
+                      _SkillGroupCard(group: groups[index]),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ProjectsSection extends StatelessWidget {
+  const _ProjectsSection({required this.projects});
+
+  final List<Project> projects;
+
+  @override
+  Widget build(BuildContext context) {
+    return _Reveal(
+      delay: const Duration(milliseconds: 300),
+      child: _PageSection(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const _SectionHeader(
+              eyebrow: 'Projects',
+              title: 'Strongest work for a recruiter scan.',
+              description:
+                  'Each project highlights the problem solved, core features, and technologies used.',
+            ),
+            const SizedBox(height: 22),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final isWide = constraints.maxWidth > 980;
+                return Column(
+                  children: [
+                    for (final project in projects) ...[
+                      _ProjectCard(project: project, horizontal: isWide),
+                      const SizedBox(height: 18),
+                    ],
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SocialProofSection extends StatelessWidget {
+  const _SocialProofSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return _Reveal(
+      delay: const Duration(milliseconds: 360),
+      child: _PageSection(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final isWide = constraints.maxWidth > 860;
+            if (!isWide) {
+              return const Column(
+                children: [
+                  _GitHubCard(),
+                  // SizedBox(height: 16),
+                  // _LinkedInCard(),
+                ],
+              );
+            }
+            return const Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(child: _GitHubCard()),
+                SizedBox(width: 16),
+                Expanded(child: _LinkedInCard()),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _GitHubCard extends StatelessWidget {
+  const _GitHubCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return _GlassCard(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const _CardTitle(
+            icon: Icons.hub_outlined,
+            title: 'GitHub',
+            subtitle: 'Profile, repositories, and contribution activity',
+          ),
+          const SizedBox(height: 18),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: const [
+              _MetricPill(value: 'Live', label: 'Profile'),
+              _MetricPill(value: 'View', label: 'Followers'),
+              _MetricPill(value: 'View', label: 'Public repos'),
+            ],
+          ),
+          const SizedBox(height: 18),
+          const _ContributionGraph(),
+          const SizedBox(height: 18),
+          const Text(
+            'Top repositories',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+          ),
+          const SizedBox(height: 10),
+          const Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              _SkillChip(text: 'Flutter apps'),
+              _SkillChip(text: 'Firebase integrations'),
+              _SkillChip(text: 'Payment flows'),
+            ],
+          ),
+          const SizedBox(height: 20),
+          _SecondaryButton(
+            icon: Icons.open_in_new,
+            label: 'Open GitHub Profile',
+            onPressed: () => _openUrl(context, _githubUrl),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LinkedInCard extends StatelessWidget {
+  const _LinkedInCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return _GlassCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const _CardTitle(
+            icon: Icons.business_center_outlined,
+            title: 'LinkedIn',
+            subtitle: 'Professional profile and recruiter contact',
+          ),
+          const SizedBox(height: 18),
+          const Text(
+            'Let us connect if you are hiring for Flutter, mobile, or cross-platform application roles.',
+            style: TextStyle(
+              color: Color(0xFFC8D1DC),
+              height: 1.55,
+              fontSize: 16,
+            ),
+          ),
+          const SizedBox(height: 26),
+          _PrimaryButton(
+            icon: Icons.person_add_alt_1_outlined,
+            label: 'Connect on LinkedIn',
+            onPressed: () => _openUrl(context, _linkedinUrl),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ContactSection extends StatelessWidget {
+  const _ContactSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return _Reveal(
+      delay: const Duration(milliseconds: 420),
+      child: _PageSection(
+        child: _GlassCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const _SectionHeader(
+                eyebrow: 'Contact',
+                title: 'Ready to build production Flutter apps.',
+                description:
+                    'For recruiter conversations, freelance opportunities, or mobile engineering roles, these are the fastest ways to reach me.',
+              ),
+              const SizedBox(height: 22),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final columns = constraints.maxWidth > 820 ? 2 : 1;
+                  final contacts = [
+                    _ContactItem(
+                      icon: Icons.mail_outline,
+                      label: 'Email',
+                      value: _emailAddress,
+                      onTap: () => _contactByEmail(context),
+                    ),
+                    _ContactItem(
+                      icon: Icons.phone_outlined,
+                      label: 'Phone',
+                      value: _phoneNumber,
+                      onTap: () => _openCv(context),
+                    ),
+                    _ContactItem(
+                      icon: Icons.business_center_outlined,
+                      label: 'LinkedIn',
+                      value: 'linkedin.com/in/qusai-jamous-12a03a272',
+                      onTap: () => _openUrl(context, _linkedinUrl),
+                    ),
+                    _ContactItem(
+                      icon: Icons.hub_outlined,
+                      label: 'GitHub',
+                      value: 'github.com',
+                      onTap: () => _openUrl(context, _githubUrl),
+                    ),
+                    _ContactItem(
+                      icon: Icons.chat_bubble_outline,
+                      label: 'WhatsApp',
+                      value: 'Optional',
+                      onTap: () => _openUrl(context, _whatsAppUrl),
+                    ),
+                  ];
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: contacts.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: columns,
+                      mainAxisExtent: 86,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                    ),
+                    itemBuilder: (context, index) => contacts[index],
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ProjectCard extends StatelessWidget {
+  const _ProjectCard({required this.project, required this.horizontal});
+
+  final Project project;
+  final bool horizontal;
+
+  @override
+  Widget build(BuildContext context) {
+    final visual = _ProjectVisual(project: project);
+    final details = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          project.title,
+          style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900),
+        ),
+        const SizedBox(height: 10),
+        Text(
+          project.summary,
+          style: const TextStyle(color: Color(0xFFC8D1DC), height: 1.55),
+        ),
+        const SizedBox(height: 16),
+        _LabelBlock(label: 'Problem solved', values: [project.problem]),
+        const SizedBox(height: 14),
+        _LabelBlock(label: 'Features', values: project.features),
+        const SizedBox(height: 14),
+        _LabelBlock(label: 'Technologies', values: project.technologies),
+        const SizedBox(height: 20),
+        Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: [
+            _SecondaryButton(
+              icon: Icons.code,
+              label: 'GitHub',
+              onPressed: () => _openUrl(context, _githubUrl),
+            ),
+            _SecondaryButton(
+              icon: Icons.open_in_new,
+              label: 'Live Demo',
+              onPressed: () => _openUrl(context, _githubUrl),
+            ),
+          ],
+        ),
+      ],
+    );
+
+    return _HoverLift(
+      child: _GlassCard(
+        child: horizontal
+            ? Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 5, child: visual),
+                  const SizedBox(width: 24),
+                  Expanded(flex: 6, child: details),
+                ],
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [visual, const SizedBox(height: 22), details],
+              ),
+      ),
+    );
+  }
+}
+
+class _ProjectVisual extends StatelessWidget {
+  const _ProjectVisual({required this.project});
+
+  final Project project;
+
+  @override
+  Widget build(BuildContext context) {
+    return AspectRatio(
+      aspectRatio: 16 / 10,
+      child: Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              project.accent.withValues(alpha: 0.85),
+              const Color(0xFF111827),
+            ],
+          ),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.14)),
+        ),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: Icon(
+                project.icon,
+                size: 92,
+                color: Colors.white.withValues(alpha: 0.28),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(project.icon, size: 34, color: Colors.white),
+                  const SizedBox(height: 10),
+                  Text(
+                    project.title,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SkillGroupCard extends StatelessWidget {
+  const _SkillGroupCard({required this.group});
+
+  final SkillGroup group;
+
+  @override
+  Widget build(BuildContext context) {
+    return _HoverLift(
+      child: _GlassCard(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                _IconBadge(icon: group.icon),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    group.title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final skill in group.skills) _SkillChip(text: skill),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ContactItem extends StatelessWidget {
+  const _ContactItem({
+    required this.icon,
+    required this.label,
+    required this.value,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final String value;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return _HoverLift(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(8),
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.05),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+          ),
+          child: Row(
+            children: [
+              _IconBadge(icon: icon),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      label,
+                      style: const TextStyle(
+                        color: Color(0xFF9CA3AF),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      value,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontWeight: FontWeight.w800),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ContributionGraph extends StatelessWidget {
+  const _ContributionGraph();
+
+  @override
+  Widget build(BuildContext context) {
+    final shades = [
+      const Color(0xFF1F2937),
+      const Color(0xFF065F46),
+      const Color(0xFF059669),
+      const Color(0xFF34D399),
+    ];
+
+    return SizedBox(
+      height: 86,
+      child: Wrap(
+        spacing: 4,
+        runSpacing: 4,
+        children: [
+          for (var i = 0; i < 84; i++)
+            Container(
+              width: 8,
+              height: 8,
+              decoration: BoxDecoration(
+                color: shades[(i * 7 + i ~/ 3) % shades.length],
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _InfoTile extends StatelessWidget {
+  const _InfoTile({required this.item});
+
+  final _SnapshotItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    return _GlassCard(
+      padding: const EdgeInsets.all(18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(item.icon, color: const Color(0xFF34D399)),
+          const Spacer(),
+          Text(
+            item.label,
+            style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 12),
+          ),
+          const SizedBox(height: 5),
+          Text(
+            item.value,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontWeight: FontWeight.w900, height: 1.25),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LabelBlock extends StatelessWidget {
+  const _LabelBlock({required this.label, required this.values});
+
+  final String label;
+  final List<String> values;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _StatusPill(
-          text: 'Flutter Developer at Token Masters since 2024',
-        ),
-        const SizedBox(height: 22),
         Text(
-          'Flutter developer building production mobile apps.',
-          style: TextStyle(
-            fontSize: _responsiveTitle(context),
-            height: 1.02,
+          label.toUpperCase(),
+          style: const TextStyle(
+            color: Color(0xFF34D399),
+            fontSize: 12,
             fontWeight: FontWeight.w900,
-            letterSpacing: 0,
           ),
         ),
-        const SizedBox(height: 22),
-        const Text(
-          'I am Qusai Adnan Zahran Jamous, a Flutter developer with two years of experience building published apps for the App Store and Google Play. I work with clean architecture, state management, payment integrations, maps, Firebase, and Google services.',
-          style: TextStyle(
-            fontSize: 18,
-            height: 1.55,
-            color: Color(0xFF4D5255),
-          ),
-        ),
-        const SizedBox(height: 28),
+        const SizedBox(height: 8),
         Wrap(
-          spacing: 12,
-          runSpacing: 12,
-          children: [
-            FilledButton.icon(
-              onPressed: () => _contactByEmail(context),
-              icon: const Icon(Icons.mail_outline),
-              label: const Text('Contact Me'),
-              style: FilledButton.styleFrom(
-                minimumSize: const Size(142, 50),
-                backgroundColor: const Color(0xFF151719),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            ),
-            OutlinedButton.icon(
-              onPressed: () => _openCv(context),
-              icon: const Icon(Icons.description_outlined),
-              label: const Text('My CV'),
-              style: OutlinedButton.styleFrom(
-                minimumSize: const Size(132, 50),
-                foregroundColor: const Color(0xFF151719),
-                side: const BorderSide(color: Color(0xFF151719)),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            ),
-          ],
+          spacing: 8,
+          runSpacing: 8,
+          children: [for (final value in values) _SkillChip(text: value)],
         ),
       ],
-    );
-  }
-
-  double _responsiveTitle(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
-    if (width < 390) return 40;
-    if (width < 680) return 48;
-    return 66;
-  }
-}
-
-class _HeroPanel extends StatelessWidget {
-  const _HeroPanel();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.sizeOf(context).width > 860 ? 520 : 460,
-      decoration: BoxDecoration(
-        color: const Color(0xFF151719),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(
-              _profileImageAsset,
-              fit: BoxFit.cover,
-              alignment: Alignment.topCenter,
-            ),
-          ),
-          Positioned.fill(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    const Color(0xFF151719).withValues(alpha: 0.28),
-                    const Color(0xFF151719).withValues(alpha: 0.92),
-                  ],
-                  stops: const [0.34, 0.62, 1],
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: 28,
-            right: 28,
-            bottom: 28,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const _StatusPill(text: 'Available for Flutter projects'),
-                const SizedBox(height: 20),
-                const Text(
-                  'Qusai Jamous',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    height: 1.1,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-                const SizedBox(height: 14),
-                const Text(
-                  'Flutter Developer with a production mindset for clean, reliable mobile app experiences.',
-                  style: TextStyle(
-                    color: Color(0xFFD9DED6),
-                    fontSize: 16,
-                    height: 1.5,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -413,35 +1161,29 @@ class _SectionHeader extends StatelessWidget {
         Text(
           eyebrow.toUpperCase(),
           style: const TextStyle(
-            color: Color(0xFF6F7F52),
-            fontSize: 13,
+            color: Color(0xFF34D399),
             fontWeight: FontWeight.w900,
+            fontSize: 12,
             letterSpacing: 0,
           ),
         ),
         const SizedBox(height: 10),
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 760),
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontSize: 36,
-              height: 1.15,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 0,
-            ),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 34,
+            height: 1.12,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 0,
           ),
         ),
         const SizedBox(height: 12),
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 660),
-          child: Text(
-            description,
-            style: const TextStyle(
-              fontSize: 16,
-              height: 1.55,
-              color: Color(0xFF5E6265),
-            ),
+        Text(
+          description,
+          style: const TextStyle(
+            color: Color(0xFFAEB7C2),
+            fontSize: 16,
+            height: 1.65,
           ),
         ),
       ],
@@ -449,301 +1191,76 @@ class _SectionHeader extends StatelessWidget {
   }
 }
 
-class _ProjectCard extends StatelessWidget {
-  const _ProjectCard({required this.project});
-
-  final Project project;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: const Color(0xFFE4DED2)),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x14000000),
-            blurRadius: 22,
-            offset: Offset(0, 14),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 54,
-            height: 54,
-            decoration: BoxDecoration(
-              color: const Color(0xFFE9E2D3),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(project.icon, color: const Color(0xFF151719)),
-          ),
-          const Spacer(),
-          Text(
-            project.title,
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 0,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            project.description,
-            style: const TextStyle(height: 1.45, color: Color(0xFF5E6265)),
-          ),
-          const SizedBox(height: 18),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [for (final tag in project.tags) _Tag(text: tag)],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SkillCloud extends StatelessWidget {
-  const _SkillCloud({required this.skills});
-
-  final List<String> skills;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const _SectionHeader(
-          eyebrow: 'Toolkit',
-          title: 'Skills that make apps feel finished.',
-          description:
-              'A practical toolkit for building maintainable apps with clean architecture, smooth integrations, and reliable state management.',
-        ),
-        const SizedBox(height: 22),
-        Wrap(
-          spacing: 10,
-          runSpacing: 10,
-          children: [for (final skill in skills) _SkillChip(text: skill)],
-        ),
-      ],
-    );
-  }
-}
-
-class _ExperienceBlock extends StatelessWidget {
-  const _ExperienceBlock();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(26),
-      decoration: BoxDecoration(
-        color: const Color(0xFFE9E2D3),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Experience',
-            style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 0,
-            ),
-          ),
-          SizedBox(height: 18),
-          _TimelineItem(
-            date: '2024 - Now',
-            title: 'Flutter Developer, Token Masters',
-            detail:
-                'Building and maintaining Flutter applications, including published apps on the App Store and Google Play.',
-          ),
-          _TimelineItem(
-            date: 'Apps',
-            title: 'Production mobile features',
-            detail:
-                'Delivered e-commerce flows, payment integrations, Google Maps features, Firebase services, and Google authentication.',
-          ),
-          _TimelineItem(
-            date: 'Code',
-            title: 'Clean architecture and state',
-            detail:
-                'Writing structured Flutter code using GetX, BLoC, Riverpod, and maintainable architecture patterns.',
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _TimelineItem extends StatelessWidget {
-  const _TimelineItem({
-    required this.date,
+class _CardTitle extends StatelessWidget {
+  const _CardTitle({
+    required this.icon,
     required this.title,
-    required this.detail,
+    required this.subtitle,
   });
 
-  final String date;
+  final IconData icon;
   final String title;
-  final String detail;
+  final String subtitle;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 18),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 58,
-            child: Text(
-              date,
-              style: const TextStyle(
-                color: Color(0xFF6F7F52),
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  detail,
-                  style: const TextStyle(
-                    color: Color(0xFF5E6265),
-                    height: 1.45,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ContactBand extends StatelessWidget {
-  const _ContactBand();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(24, 44, 24, 28),
-      padding: const EdgeInsets.all(28),
-      decoration: BoxDecoration(
-        color: const Color(0xFF151719),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final isWide = constraints.maxWidth > 720;
-          final content = Column(
+    return Row(
+      children: [
+        _IconBadge(icon: icon),
+        const SizedBox(width: 14),
+        Expanded(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Text(
-                'Let us build a reliable Flutter app.',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 34,
-                  height: 1.1,
+                title,
+                style: const TextStyle(
+                  fontSize: 24,
                   fontWeight: FontWeight.w900,
-                  letterSpacing: 0,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 4),
               Text(
-                'Email: qqjamous12@gmail.com   |   LinkedIn: linkedin.com/in/qusai-jamous-12a03a272   |   GitHub: github.com',
-                style: TextStyle(color: Color(0xFFD9DED6), height: 1.5),
+                subtitle,
+                style: const TextStyle(color: Color(0xFF9CA3AF), height: 1.4),
               ),
             ],
-          );
-          final action = FilledButton.icon(
-            onPressed: () => _contactByEmail(context),
-            icon: const Icon(Icons.send_outlined),
-            label: const Text('Contact Me'),
-            style: FilledButton.styleFrom(
-              minimumSize: const Size(150, 50),
-              backgroundColor: const Color(0xFFB8C48A),
-              foregroundColor: const Color(0xFF151719),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-          );
-
-          if (!isWide) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [content, const SizedBox(height: 22), action],
-            );
-          }
-
-          return Row(
-            children: [
-              Expanded(child: content),
-              const SizedBox(width: 28),
-              action,
-            ],
-          );
-        },
-      ),
+          ),
+        ),
+      ],
     );
   }
 }
 
-Future<void> _contactByEmail(BuildContext context) async {
-  final opened = await openExternalLink('mailto:$_emailAddress');
-  if (opened || !context.mounted) return;
-
-  await Clipboard.setData(const ClipboardData(text: _emailAddress));
-  if (!context.mounted) return;
-  ScaffoldMessenger.of(
-    context,
-  ).showSnackBar(const SnackBar(content: Text('Email copied: $_emailAddress')));
-}
-
-Future<void> _openCv(BuildContext context) async {
-  final opened = await openExternalLink(_cvAssetUrl);
-  if (opened || !context.mounted) return;
-
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(
-      content: Text(
-        'CV added at assets/cv/qusai_jamous_flutter_developer_cv.pdf',
-      ),
-    ),
-  );
-}
-
-class _PageSection extends StatelessWidget {
-  const _PageSection({required this.child, this.topPadding = 64});
+class _GlassCard extends StatelessWidget {
+  const _GlassCard({
+    required this.child,
+    this.padding = const EdgeInsets.all(24),
+  });
 
   final Widget child;
-  final double topPadding;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(24, topPadding, 24, 24),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1180),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+        child: Container(
+          padding: padding,
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.07),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.18),
+                blurRadius: 30,
+                offset: const Offset(0, 18),
+              ),
+            ],
+          ),
           child: child,
         ),
       ),
@@ -751,29 +1268,83 @@ class _PageSection extends StatelessWidget {
   }
 }
 
-class _IconAction extends StatelessWidget {
-  const _IconAction({
-    required this.icon,
-    required this.label,
-    required this.onPressed,
-  });
+class _HoverLift extends StatefulWidget {
+  const _HoverLift({required this.child});
 
-  final IconData icon;
-  final String label;
-  final VoidCallback onPressed;
+  final Widget child;
+
+  @override
+  State<_HoverLift> createState() => _HoverLiftState();
+}
+
+class _HoverLiftState extends State<_HoverLift> {
+  bool _hovered = false;
 
   @override
   Widget build(BuildContext context) {
-    return Tooltip(
-      message: label,
-      child: IconButton.outlined(
-        onPressed: onPressed,
-        icon: Icon(icon),
-        style: IconButton.styleFrom(
-          fixedSize: const Size(44, 44),
-          foregroundColor: const Color(0xFF151719),
-          side: const BorderSide(color: Color(0xFFD6CDBC)),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    return MouseRegion(
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        curve: Curves.easeOut,
+        transform: Matrix4.translationValues(0, _hovered ? -4 : 0, 0),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class _Reveal extends StatelessWidget {
+  const _Reveal({required this.child, this.delay = Duration.zero});
+
+  final Widget child;
+  final Duration delay;
+
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0, end: 1),
+      duration: Duration(milliseconds: 560 + delay.inMilliseconds),
+      curve: Curves.easeOutCubic,
+      builder: (context, value, child) {
+        final adjusted = delay == Duration.zero
+            ? value
+            : ((value * (560 + delay.inMilliseconds) - delay.inMilliseconds) /
+                      560)
+                  .clamp(0.0, 1.0);
+        return Opacity(
+          opacity: adjusted,
+          child: Transform.translate(
+            offset: Offset(0, (1 - adjusted) * 22),
+            child: child,
+          ),
+        );
+      },
+      child: child,
+    );
+  }
+}
+
+class _PageSection extends StatelessWidget {
+  const _PageSection({required this.child, this.verticalPadding = 34});
+
+  final Widget child;
+  final double verticalPadding;
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
+    final horizontal = width < 560 ? 18.0 : 32.0;
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontal,
+        vertical: verticalPadding,
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1180),
+          child: child,
         ),
       ),
     );
@@ -788,39 +1359,53 @@ class _StatusPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+      padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
       decoration: BoxDecoration(
-        color: const Color(0xFFE9E2D3),
+        color: const Color(0xFF34D399).withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: const Color(0xFF34D399).withValues(alpha: 0.28),
+        ),
       ),
       child: Text(
         text,
         style: const TextStyle(
-          color: Color(0xFF4D573A),
+          color: Color(0xFF8EF3C5),
           fontWeight: FontWeight.w800,
-          fontSize: 13,
         ),
       ),
     );
   }
 }
 
-class _Tag extends StatelessWidget {
-  const _Tag({required this.text});
+class _MetricPill extends StatelessWidget {
+  const _MetricPill({required this.value, required this.label});
 
-  final String text;
+  final String value;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
+        color: Colors.black.withValues(alpha: 0.25),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: const Color(0xFFE4DED2)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.11)),
       ),
-      child: Text(
-        text,
-        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            value,
+            style: const TextStyle(
+              color: Color(0xFF34D399),
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(width: 7),
+          Text(label, style: const TextStyle(color: Color(0xFFD1D5DB))),
+        ],
       ),
     );
   }
@@ -834,27 +1419,211 @@ class _SkillChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+      padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.white.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: const Color(0xFFE4DED2)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
       ),
-      child: Text(text, style: const TextStyle(fontWeight: FontWeight.w800)),
+      child: Text(
+        text,
+        style: const TextStyle(
+          color: Color(0xFFE5E7EB),
+          fontSize: 13,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
     );
   }
+}
+
+class _IconBadge extends StatelessWidget {
+  const _IconBadge({required this.icon});
+
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 42,
+      height: 42,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: const Color(0xFF34D399).withValues(alpha: 0.14),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: const Color(0xFF34D399).withValues(alpha: 0.25),
+        ),
+      ),
+      child: Icon(icon, color: const Color(0xFF34D399), size: 22),
+    );
+  }
+}
+
+class _RoundIconButton extends StatelessWidget {
+  const _RoundIconButton({
+    required this.icon,
+    required this.label,
+    required this.onPressed,
+  });
+
+  final IconData icon;
+  final String label;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: label,
+      child: IconButton.filledTonal(
+        onPressed: onPressed,
+        icon: Icon(icon),
+        style: IconButton.styleFrom(
+          fixedSize: const Size(44, 44),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          backgroundColor: Colors.white.withValues(alpha: 0.08),
+          foregroundColor: Colors.white,
+        ),
+      ),
+    );
+  }
+}
+
+class _PrimaryButton extends StatelessWidget {
+  const _PrimaryButton({
+    required this.icon,
+    required this.label,
+    required this.onPressed,
+  });
+
+  final IconData icon;
+  final String label;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return FilledButton.icon(
+      onPressed: onPressed,
+      icon: Icon(icon),
+      label: Text(label),
+      style: FilledButton.styleFrom(
+        minimumSize: const Size(156, 52),
+        backgroundColor: const Color(0xFF34D399),
+        foregroundColor: const Color(0xFF062014),
+        textStyle: const TextStyle(fontWeight: FontWeight.w900),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+    );
+  }
+}
+
+class _SecondaryButton extends StatelessWidget {
+  const _SecondaryButton({
+    required this.icon,
+    required this.label,
+    required this.onPressed,
+  });
+
+  final IconData icon;
+  final String label;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton.icon(
+      onPressed: onPressed,
+      icon: Icon(icon),
+      label: Text(label),
+      style: OutlinedButton.styleFrom(
+        minimumSize: const Size(146, 52),
+        foregroundColor: Colors.white,
+        side: BorderSide(color: Colors.white.withValues(alpha: 0.22)),
+        textStyle: const TextStyle(fontWeight: FontWeight.w900),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+    );
+  }
+}
+
+Future<void> _openUrl(BuildContext context, String url) async {
+  if (url == _whatsAppUrl) {
+    _showMessage(
+      context,
+      'Add a WhatsApp number when you want to enable this.',
+    );
+    return;
+  }
+
+  final opened = await openExternalLink(url);
+  if (!opened && context.mounted) {
+    await Clipboard.setData(ClipboardData(text: url));
+    if (context.mounted) {
+      _showMessage(context, 'Link copied to clipboard.');
+    }
+  }
+}
+
+Future<void> _openCv(BuildContext context) async {
+  final opened = await openExternalLink(_cvAssetUrl);
+  if (!opened && context.mounted) {
+    await Clipboard.setData(const ClipboardData(text: _cvAssetUrl));
+    if (context.mounted) {
+      _showMessage(context, 'CV link copied to clipboard.');
+    }
+  }
+}
+
+Future<void> _contactByEmail(BuildContext context) async {
+  final mailto = Uri(
+    scheme: 'mailto',
+    path: _emailAddress,
+    queryParameters: {'subject': 'Flutter Mobile Developer Opportunity'},
+  ).toString();
+  final opened = await openExternalLink(mailto);
+  if (!opened && context.mounted) {
+    await Clipboard.setData(const ClipboardData(text: _emailAddress));
+    if (context.mounted) {
+      _showMessage(context, 'Email copied to clipboard.');
+    }
+  }
+}
+
+void _showMessage(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
 }
 
 class Project {
   const Project({
     required this.title,
-    required this.description,
-    required this.tags,
+    required this.summary,
+    required this.problem,
+    required this.features,
+    required this.technologies,
     required this.icon,
+    required this.accent,
   });
 
   final String title;
-  final String description;
-  final List<String> tags;
+  final String summary;
+  final String problem;
+  final List<String> features;
+  final List<String> technologies;
+  final IconData icon;
+  final Color accent;
+}
+
+class SkillGroup {
+  const SkillGroup(this.title, this.skills, this.icon);
+
+  final String title;
+  final List<String> skills;
+  final IconData icon;
+}
+
+class _SnapshotItem {
+  const _SnapshotItem(this.label, this.value, this.icon);
+
+  final String label;
+  final String value;
   final IconData icon;
 }
